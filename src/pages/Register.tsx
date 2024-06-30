@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 const RegisterPage = () => {
   return (
-    <section className="flex justify-center items-center h-screen">
+    <section className="flex justify-center items-center">
       {" "}
       <Card className="w-full max-w-sm">
         <CardHeader>

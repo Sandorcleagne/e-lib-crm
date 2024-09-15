@@ -10,8 +10,8 @@ import {
   ShoppingCart,
   Users,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,14 +19,19 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+} from "../components/ui/dropdown-menu";
+import { Input } from "../components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const DashboardLayout = () => {
   const location = useLocation();
   const currentRouteName = location?.pathname;
+  const getLinkClass = (route: string): string =>
+    currentRouteName === route
+      ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+      : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary";
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -45,22 +50,14 @@ const DashboardLayout = () => {
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <Link
                 to={"/dashboard/home"}
-                className={
-                  currentRouteName === "/dashboard/home"
-                    ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                    : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                }
+                className={getLinkClass("/dashboard/home")}
               >
                 <Home className="h-4 w-4" />
                 Home
               </Link>
               <Link
                 to={"/dashboard/orders"}
-                className={
-                  currentRouteName === "/dashboard/orders"
-                    ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                    : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                }
+                className={getLinkClass("/dashboard/orders")}
               >
                 <ShoppingCart className="h-4 w-4" />
                 Orders
@@ -70,44 +67,28 @@ const DashboardLayout = () => {
               </Link>
               <Link
                 to={"/dashboard/books"}
-                className={
-                  currentRouteName === "/dashboard/books"
-                    ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                    : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                }
+                className={getLinkClass("/dashboard/books")}
               >
                 <Package className="h-4 w-4" />
                 Books{" "}
               </Link>
               <Link
                 to={"/dashboard/customers"}
-                className={
-                  currentRouteName === "/dashboard/customers"
-                    ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                    : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                }
+                className={getLinkClass("/dashboard/customers")}
               >
                 <Users className="h-4 w-4" />
                 Customers
               </Link>
               <Link
                 to={"/dashboard/analytics"}
-                className={
-                  currentRouteName === "/dashboard/analytics"
-                    ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                    : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                }
+                className={getLinkClass("/dashboard/analytics")}
               >
                 <LineChart className="h-4 w-4" />
                 Analytics
               </Link>
               <Link
                 to={"/dashboard/register"}
-                className={
-                  currentRouteName === "/dashboard/register"
-                    ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                    : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                }
+                className={getLinkClass("/dashboard/register")}
               >
                 <Users className="h-4 w-4" />
                 Register New User

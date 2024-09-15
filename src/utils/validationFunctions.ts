@@ -1,27 +1,28 @@
 import { Dispatch, SetStateAction } from "react";
-import { ValidationErrorState } from "../types";
+import { loginValidationObj } from "../types";
 
 export const loginValidations = (
   email: string,
   password: string,
-  setValidationError: Dispatch<SetStateAction<ValidationErrorState>>
+  setValidationError: Dispatch<SetStateAction<loginValidationObj>>
 ) => {
-  if (email?.trim() === "") {
-    setValidationError((prevState) => ({
-      ...prevState,
-      emailErrorMsg: "Email is required.",
-    }));
-  }
-  if (password?.trim() === "") {
-    setValidationError((prevState) => ({
-      ...prevState,
-      passwordErrorMsg: "Password is required.",
-    }));
+  const err: loginValidationObj = { email: "", password: "" };
+  let status = false;
+  if (!email) {
+    err.email = "Email is required";
+    setValidationError(err);
+    status = true;
   } else {
-    setValidationError({
-      emailErrorMsg: "",
-      passwordErrorMsg: "",
-    });
-    return;
+    setValidationError({} as loginValidationObj);
+    status = false;
   }
+  if (!password) {
+    err.password = "Password is required";
+    setValidationError(err);
+    status = true;
+  } else {
+    setValidationError({} as loginValidationObj);
+    status = false;
+  }
+  return status;
 };

@@ -50,8 +50,6 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log("calling+++");
-    console.log("error------", error);
     const originalRequest = error.config;
 
     if (
@@ -87,5 +85,10 @@ api.interceptors.response.use(
 );
 
 export const getBooks = async () => api.get("/books/get-all-books/10");
-
+export const addBook = async (formData: FormData) =>
+  api.post("/books/create-book", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data", // Important for uploading files
+    },
+  });
 export default api;

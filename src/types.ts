@@ -20,6 +20,12 @@ export interface breadCrumbs {
   title: string;
   href: string;
 }
+
+export interface addBookBreadCrum {
+  id: number;
+  title: string;
+  href: string;
+}
 export interface dataItems {
   active: boolean;
   author: string;

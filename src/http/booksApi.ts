@@ -61,6 +61,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const newAccessToken = await refreshAccessToken();
+        console.log("newAccessToken", newAccessToken);
         if (newAccessToken) {
           // Update the cookie with the new access token
           document.cookie = `accessToken=${newAccessToken}; path=/`;

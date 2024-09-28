@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Card,
   CardContent,
@@ -6,18 +6,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 import { useRef, useState } from "react";
 import { loginValidations } from "../utils/validationFunctions";
 import { CustomError, loginValidationObj } from "../types";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../http/api";
-import { useSnackbar } from "notistack";
+import { useToast } from "../components/ui/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
-  const { enqueueSnackbar } = useSnackbar();
+  const { toast } = useToast();
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -33,20 +33,14 @@ const LoginPage = () => {
     onError: (error: unknown) => {
       const CustomError = error as CustomError;
       if (CustomError?.response === undefined) {
-        enqueueSnackbar("Something went wrong please try again later", {
-          variant: "error",
-          anchorOrigin: {
-            vertical: "top", // 'top' | 'bottom'
-            horizontal: "right", // 'left' | 'center' | 'right'
-          },
+        toast({
+          variant: "destructive",
+          title: "Something went wrong please try again later",
         });
       } else {
-        enqueueSnackbar(CustomError?.response?.data?.message, {
-          variant: "error",
-          anchorOrigin: {
-            vertical: "top", // 'top' | 'bottom'
-            horizontal: "right", // 'left' | 'center' | 'right'
-          },
+        toast({
+          variant: "destructive",
+          title: CustomError?.response?.data?.message,
         });
       }
     },
